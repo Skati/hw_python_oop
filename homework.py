@@ -2,7 +2,7 @@ import datetime as dt
 
 
 class Calculator:
-    pass
+    print('first commit')
 
 
 class Record:
