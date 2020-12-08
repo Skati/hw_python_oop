@@ -58,21 +58,3 @@ class Record:
         self.date = dt.datetime.now().date() if not date else dt.datetime.strptime(date, '%d.%m.%Y').date()
         self.comment = comment
 
-
-# для CashCalculator
-r1 = Record(amount=145, comment="Безудержный шопинг", date="08.12.2020")
-r2 = Record(amount=156, comment="Наполнение потребительской корзины", date="08.12.2020")
-r3 = Record(amount=691, comment="Катание на такси", date="08.03.2019")
-r33 =Record(amount=691, comment="Катание на такси")
-# для CaloriesCalculator
-r4 = Record(amount=1186, comment="Кусок тортика. И ещё один.", date="24.02.2019")
-r5 = Record(amount=84, comment="Йогурт.", date="23.02.2019")
-r6 = Record(amount=1140, comment="Баночка чипсов.", date="24.02.2019")
-
-cash_calculator = CashCalculator(1000)
-cash_calculator.add_record(r1)
-cash_calculator.add_record(r2)
-print(cash_calculator.get_today_cash_remained('rub'))
-
-
-
