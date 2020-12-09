@@ -35,7 +35,6 @@ class CashCalculator(Calculator):
             'rub': ['руб', 1]
         }
         today_stats = super().get_today_stats()
-        today_currency_stats = round(today_stats / currency_dict[currency][1],2)
         today_remainder = round(abs(today_stats-self.limit) / currency_dict[currency][1],2)
 
         if today_stats < self.limit:
@@ -49,12 +48,13 @@ class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
         today_stats = super().get_today_stats()
         last_calorie = self.limit - today_stats
-        return f'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более' \
-               f' {last_calorie} кКал' if today_stats < self.limit else 'Хватит есть!'
+        phrase = 'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более'
+        return f'{phrase} {last_calorie} кКал' if today_stats < self.limit else 'Хватит есть!'
 
 class Record:
     def __init__(self, amount, comment, date=''):
         self.amount = amount
         self.date = dt.datetime.now().date() if not date else dt.datetime.strptime(date, '%d.%m.%Y').date()
         self.comment = comment
+
 
