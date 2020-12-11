@@ -11,7 +11,8 @@ class Calculator:
         self.records.append(record)
 
     def get_today_stats(self):
-        today_stats = sum(record.amount for record in self.records if record.date == self.date_now)
+        today_stats = sum(record.amount for record in self.records
+                          if record.date == self.date_now)
         return today_stats
 
     def get_week_stats(self):
@@ -34,25 +35,31 @@ class CashCalculator(Calculator):
             'rub': ('руб', 1)
         }
         today_stats = self.get_today_stats()
-        today_remainder = round(abs(self.limit - today_stats) / currency_dict[currency][1], 2)
+        today_remainder = round(abs(self.limit - today_stats)
+                                / currency_dict[currency][1], 2)
 
         if today_stats < self.limit:
-            return f'На сегодня осталось {today_remainder} {currency_dict[currency][0]}'
+            return (f'На сегодня осталось {today_remainder} '
+                    f'{currency_dict[currency][0]}')
         elif today_stats == self.limit:
             return 'Денег нет, держись'
-        return f'Денег нет, держись: твой долг - {today_remainder} {currency_dict[currency][0]}'
+        return (f'Денег нет, держись: твой долг - '
+                f'{today_remainder} {currency_dict[currency][0]}')
 
 
 class CaloriesCalculator(Calculator):
     def get_calories_remained(self):
         today_stats = self.get_today_stats()
         last_calorie = self.limit - today_stats
-        phrase = 'Сегодня можно съесть что-нибудь ещё, но с общей калорийностью не более'
-        return f'{phrase} {last_calorie} кКал' if today_stats < self.limit else 'Хватит есть!'
+        phrase = ('Сегодня можно съесть что-нибудь ещё,'
+                  ' но с общей калорийностью не более')
+        return (f'{phrase} {last_calorie} кКал'
+                if today_stats < self.limit else 'Хватит есть!')
 
 
 class Record:
     def __init__(self, amount, comment, date=None):
         self.amount = amount
-        self.date = dt.date.today() if date is None else dt.datetime.strptime(date, '%d.%m.%Y').date()
+        self.date = (dt.date.today() if date is None
+                     else dt.datetime.strptime(date, '%d.%m.%Y').date())
         self.comment = comment
