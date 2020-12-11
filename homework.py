@@ -29,8 +29,8 @@ class CashCalculator(Calculator):
 
     def get_today_cash_remained(self, currency):
         currency_dict = {
-            'usd': ('USD', CashCalculator.USD_RATE),
-            'eur': ('Euro', CashCalculator.EURO_RATE),
+            'usd': ('USD', self.USD_RATE),
+            'eur': ('Euro', self.EURO_RATE),
             'rub': ('руб', 1)
         }
         today_stats = self.get_today_stats()
